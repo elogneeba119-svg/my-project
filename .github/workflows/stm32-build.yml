@@ -1,0 +1,28 @@
+name: Build STM32 Bare-Metal Firmware
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install ARM Toolchain & Make
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential gcc-arm-none-eabi
+
+    - name: Compile STM32 Code
+      run: |
+        # This assumes your project includes a custom Makefile or build script
+        make all 
+
+    - name: Upload Hex and Bin Firmware
+      uses: actions/upload-artifact@v4
+      with:
+        name: STM32-Firmware-Outputs
+        path: |
+          build/*.bin
+          build/*.hex
