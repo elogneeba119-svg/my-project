@@ -13,3 +13,4 @@ all:
 	$(OBJCOPY) -O ihex $(TARGET).elf $(TARGET).hex
 	$(OBJCOPY) -O binary $(TARGET).elf $(TARGET).bin
 	@echo "STM32 Binary and Hex files generated successfully!"
+
